@@ -17,12 +17,14 @@ def GetAllPosts():
       pointing to the post content, and 'time' key pointing to the time
       it was posted.
     '''
-    
+
     ## Database connection
     DB = psycopg2.connect("dbname=forum")
 
     posts = [{'content': str(row[1]), 'time': str(row[0])} for row in DB]
     posts.sort(key=lambda row: row['time'], reverse=True)
+
+    DB.close()
     return posts
 
 ## Add a post to the database.
