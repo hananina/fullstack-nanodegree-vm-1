@@ -3,9 +3,7 @@
 # 
 
 import time
-
-
-
+import psycopg2
 
 
 ## Get posts from database.
