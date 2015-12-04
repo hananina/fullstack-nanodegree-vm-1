@@ -5,6 +5,7 @@
 import time
 import psycopg2
 
+
 ## Get posts from database.
 def GetAllPosts():
     '''Get all the posts from the database, sorted with the newest first.
