@@ -39,8 +39,13 @@ def countPlayers():
     conn = connect()
     c = conn.cursor()
     c.execute("SELECT size_players FROM tournament;")
+    result = c.fetchone()
     conn.commit()
     conn.close()
+    
+    print result
+
+    return result
 
 
 def registerPlayer(name):
@@ -73,7 +78,7 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    
+
     conn = connect()
     c = conn.cursor()
     c.execute("SELECT id_player, name, win_record FROM players ORDER BY win_record DESC;")
@@ -114,7 +119,16 @@ def swissPairings():
         name2: the second player's name
     """
 
-    print "jaja"
+    conn = connect()
+    c = conn.cursor()
+    c.execute("SELECT id_player, name FROM players ORDER BY win_record DESC;")
+    result = c.fetchmany(2)
+
+    conn.commit()
+    conn.close()
+
+    print result
+    return result
 
 
 if __name__ == '__main__':
@@ -123,9 +137,9 @@ if __name__ == '__main__':
     # deleteMatches()
     # deletePlayers()
     countPlayers()
-    registerPlayer("machi")
+    # registerPlayer("machi")
     playerStandings()
-    reportMatch("7", "11")
+    reportMatch("24", "1")
     swissPairings()
 
     print "Success!  All tests pass!"
